@@ -1,0 +1,14 @@
+flowchart TD
+  q{Is the work CPU-bound or I/O-bound?}
+
+  q -->|CPU-bound| cpu_q{Pure Python or NumPy/C?}
+  q -->|I/O-bound| io_q{How many concurrent ops?}
+
+  cpu_q -->|Pure Python| mp[ProcessPoolExecutor<br/>multiprocessing<br/>bypasses the GIL]
+  cpu_q -->|NumPy / C extension| threads_for_c[ThreadPoolExecutor<br/>C code releases the GIL]
+
+  io_q -->|Up to ~100| threads[ThreadPoolExecutor<br/>simple, good enough]
+  io_q -->|Hundreds to thousands| async_choice[asyncio + async libraries<br/>scales further, uses less memory]
+
+  classDef solution fill:#d3f9d8,stroke:#2f9e44;
+  class mp,threads_for_c,threads,async_choice solution;

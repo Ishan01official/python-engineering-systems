@@ -1,0 +1,16 @@
+flowchart LR
+  src[your_code.py<br/>source text]
+  tok[Tokens]
+  ast[AST<br/>Abstract Syntax Tree]
+  bc[Bytecode<br/>.pyc]
+  vm[Python VM<br/>executes bytecode]
+  out[Program behavior]
+
+  src --> |lex| tok
+  tok --> |parse| ast
+  ast --> |compile| bc
+  bc --> |interpret| vm
+  vm --> out
+
+  classDef step fill:#e7f5ff,stroke:#1971c2,color:#0b3d6b;
+  class src,tok,ast,bc,vm,out step;

@@ -1,0 +1,23 @@
+flowchart TD
+  start{What do you need?}
+
+  start -->|Key → value pairs| dict_q{What kind?}
+  start -->|Just items| items_q{Order matters?}
+
+  dict_q -->|Counting frequencies| counter[Counter]
+  dict_q -->|Aggregating into lists| defaultdict[defaultdict<br/>of lists]
+  dict_q -->|General mapping| plain_dict[dict]
+
+  items_q -->|Yes| ordered_q{Will it grow?}
+  items_q -->|No| no_order_q{Uniqueness needed?}
+
+  ordered_q -->|Yes, append/grow freely| use_list[list]
+  ordered_q -->|Yes, both ends fast| use_deque[collections.deque]
+  ordered_q -->|No, fixed record| use_tuple[tuple / NamedTuple]
+
+  no_order_q -->|Yes, mutable| use_set[set]
+  no_order_q -->|Yes, also hashable| use_frozenset[frozenset]
+  no_order_q -->|No| go_back[Use list]
+
+  classDef pick fill:#d3f9d8,stroke:#2f9e44;
+  class counter,defaultdict,plain_dict,use_list,use_deque,use_tuple,use_set,use_frozenset,go_back pick;

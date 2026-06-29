@@ -1,0 +1,20 @@
+flowchart LR
+  upstream[Upstream system<br/>e.g. supplier API]
+  sns[SNS topic]
+  lambda[Lambda handler<br/>parse + transform]
+  raw[S3: raw/<br/>partitioned by source + date]
+  staged[S3: staged/<br/>parquet, typed, validated]
+  curated[S3: curated/<br/>deduped + joined]
+  athena[Athena / Spark<br/>query layer]
+
+  upstream -->|publishes event| sns
+  sns -->|triggers| lambda
+  lambda -->|write idempotent key| raw
+  raw -->|scheduled job| staged
+  staged -->|joins, dedup| curated
+  curated -->|SQL queries| athena
+
+  classDef store fill:#fff3bf,stroke:#f08c00;
+  classDef compute fill:#d3f9d8,stroke:#2f9e44;
+  class raw,staged,curated store;
+  class lambda,athena compute;

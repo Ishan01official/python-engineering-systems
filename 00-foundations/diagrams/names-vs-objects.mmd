@@ -1,0 +1,22 @@
+flowchart LR
+  subgraph names["Names (in current namespace)"]
+    a[a]
+    b[b]
+    c[c]
+  end
+
+  subgraph heap["Objects in memory"]
+    L["list: [1, 2, 3]"]
+    I["int: 42"]
+  end
+
+  a --> L
+  b --> L
+  c --> I
+
+  note["Two names (a, b) → ONE list object<br/>Mutating through 'b' is visible via 'a'"]
+
+  classDef name fill:#fff3bf,stroke:#f08c00;
+  classDef obj fill:#d3f9d8,stroke:#2f9e44;
+  class a,b,c name;
+  class L,I obj;

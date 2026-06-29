@@ -1,0 +1,18 @@
+What is the Python interpreter?
+What is source code?
+What is bytecode?
+What is the PVM?
+What is machine code?
+Name two or more variations on Python’s standard execution model.
+
+The Python interpreter is a program that runs the Python programs you write. It essentially intermediates between your Python instructions and those available in a CPU’s machine code.
+
+Source code is the statements you write for your program. It consists of text in text files whose names normally end with a .py extension.
+
+Bytecode is the lower-level form of your program after Python compiles it. Python automatically stores bytecode in files with a .pyc extension when possible, and automatically re-creates it when needed.
+
+The PVM is the Python Virtual Machine—the runtime engine of Python that interprets your compiled bytecode.
+
+Machine code is the low-level instructions of the underlying CPU on a computing device like a PC or phone. Because this is what every program ultimately runs, Python code must be translated to this by a software layer like the PVM interpreter, or JIT or AOT compilers.
+
+Numba, Shed Skin, and standalone executables are all variations on the execution model. In addition, the alternative implementations of Python named in the next two answers modify the model in some fashion as well—by replacing bytecode and VMs, or by adding JIT and AOT compilers.

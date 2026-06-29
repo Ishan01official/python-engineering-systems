@@ -1,0 +1,27 @@
+classDiagram
+  class Animal {
+    +name: str
+    +__init__(name)
+    +speak() str
+  }
+  class Dog {
+    +breed: str
+    +__init__(name, breed)
+    +speak() str
+  }
+  class Cat {
+    +indoor: bool
+    +__init__(name, indoor)
+    +speak() str
+  }
+  class Puppy {
+    +__init__(name, breed)
+    +speak() str
+  }
+
+  Animal <|-- Dog
+  Animal <|-- Cat
+  Dog <|-- Puppy
+
+  note for Animal "Base class: shared name + default speak()"
+  note for Puppy "Overrides speak() to call super() + add behavior"
